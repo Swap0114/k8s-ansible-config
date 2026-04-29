@@ -1,0 +1,18 @@
+---
+- name: Create prometheus config directory
+  file:
+    path: /etc/prometheus
+    state: directory
+    mode: '0755'
+
+- name: Deploy prometheus scrape config
+  template:
+    src: prometheus.yml.j2
+    dest: /etc/prometheus/prometheus.yml
+    mode: '0644'
+
+- name: Reload prometheus if running
+  systemd:
+    name: prometheus
+    state: reloaded
+  ignore_errors: yes
