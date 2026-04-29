@@ -14,5 +14,5 @@ receivers:
   - api_url: '{{ slack_webhook_url }}'
     channel: '#alerts'
     send_resolved: true
-    title: '[{{ .Status | toUpper }}] {{ .CommonLabels.alertname }}'
-    text: '{{ range .Alerts }}{{ .Annotations.summary }}{{ end }}'
+    title: '{% raw %}[{{ .Status | toUpper }}] {{ .CommonLabels.alertname }}{% endraw %}'
+    text: '{% raw %}{{ range .Alerts }}{{ .Annotations.summary }}{{ end }}{% endraw %}'
